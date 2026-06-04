@@ -1,43 +1,418 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>참새연구소</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <script src="assets/js/main.js" defer></script>
-  </head>
-  <body>
-    <div class="page">
-      <header class="site-header">
-        <div class="container">
-          <h1 class="brand-title fade-in">참새연구소</h1>
-          <p class="brand-subtitle fade-in delay-1">작고 단단한 원격 연결 도구를 연구하고 만드는 팀입니다.</p>
-        </div>
-      </header>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>참새연구소 — SparrowLabs</title>
+<meta name="description" content="참새연구소(SparrowLabs)는 일상의 작은 불편함을 푸는 실용적인 소프트웨어를 만드는 1인 스튜디오입니다." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+<style>
+  :root {
+    --bg: oklch(0.985 0.004 80);
+    --bg-2: oklch(0.965 0.006 75);
+    --ink: oklch(0.22 0.012 60);
+    --ink-2: oklch(0.42 0.012 60);
+    --ink-3: oklch(0.62 0.010 60);
+    --line: oklch(0.88 0.008 70);
+    --line-2: oklch(0.93 0.006 70);
 
-      <main class="container fade-in delay-2">
-        <h2 class="section-title">앱 서비스</h2>
-        <section class="app-grid" aria-label="앱 목록">
-          <article class="card">
-            <img class="app-icon" src="assets/images/tinyssh_icon.png" alt="TinySSH 아이콘" />
-            <h3>TinySSH</h3>
-            <p>가볍고 빠르게 서버에 접속하는 모바일 SSH 클라이언트입니다.</p>
-            <a class="btn primary" href="tinyssh/index.html">자세히 보기</a>
-          </article>
+    /* Defaults; React app overrides via inline style on the root wrapper. */
+    --accent: oklch(0.55 0.075 55);
+    --accent-soft: oklch(0.55 0.075 55 / 0.10);
+    --density-scale: 1;
 
-          <article class="card">
-            <img class="app-icon" src="assets/images/remotehub_icon.png" alt="RemoteHub 아이콘" />
-            <h3>RemoteHub</h3>
-            <p>앱 내부에서 원격 연결 요청을 관리하는 허브형 도구입니다.</p>
-            <a class="btn primary" href="remotehub/index.html">자세히 보기</a>
-          </article>
-        </section>
-      </main>
+    --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", "Apple SD Gothic Neo", sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-      <footer class="site-footer">
-        <div class="container">© <span data-year></span> 참새연구소. All rights reserved.</div>
-      </footer>
-    </div>
-  </body>
+    --max: 1120px;
+    --pad-x: clamp(20px, 4vw, 56px);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-feature-settings: "ss03", "ss04";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+    font-size: 16px;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+
+  /* ---------- Layout ---------- */
+  .shell {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--pad-x);
+  }
+
+  /* Top bar */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mark {
+    width: 22px; height: 22px;
+    background: var(--ink);
+    position: relative;
+    border-radius: 2px;
+  }
+  .mark::after {
+    content: "";
+    position: absolute;
+    inset: auto 3px 3px auto;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 1px;
+  }
+  .brand-name {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: 15px;
+  }
+  .brand-name .en {
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--ink-3);
+    margin-left: 8px;
+    font-size: 12.5px;
+    letter-spacing: 0;
+  }
+  .topnav {
+    display: flex;
+    gap: 22px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+  .topnav a {
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .topnav a:hover { color: var(--ink); }
+  .topnav a:hover::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+  }
+  @media (max-width: 640px) {
+    .topnav { display: none; }
+  }
+
+  /* Section primitives — multiplied by --density-scale so the Tweaks panel
+     can dial vertical rhythm without us editing every clamp() by hand. */
+  section { border-bottom: 1px solid var(--line-2); }
+  .sec {
+    padding-top: calc(clamp(56px, 9vw, 104px) * var(--density-scale));
+    padding-bottom: calc(clamp(56px, 9vw, 104px) * var(--density-scale));
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(24px, 5vw, 80px);
+  }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+  .sec-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-top: 6px;
+  }
+  .sec-label .num { color: var(--accent); }
+  .sec-label .bar {
+    flex: 0 0 18px;
+    height: 1px;
+    background: var(--line);
+    transform: translateY(-4px);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding-top: calc(clamp(72px, 12vw, 140px) * var(--density-scale));
+    padding-bottom: calc(clamp(72px, 12vw, 140px) * var(--density-scale));
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(40px, 6.4vw, 84px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .hero h1 .accent {
+    color: var(--accent);
+    font-weight: 500;
+    font-style: italic;
+    font-family: "Times New Roman", "Pretendard Variable", serif;
+  }
+  .hero .lede {
+    margin-top: 36px;
+    max-width: 620px;
+    font-size: clamp(16px, 1.5vw, 19px);
+    color: var(--ink-2);
+    line-height: 1.65;
+    text-wrap: pretty;
+  }
+  .hero .meta {
+    margin-top: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 40px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--ink-3);
+  }
+  .hero .meta b {
+    color: var(--ink);
+    font-weight: 500;
+    display: block;
+    margin-top: 4px;
+    font-family: var(--sans);
+    font-size: 14px;
+  }
+  .hero .tagline {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero .tagline::before {
+    content: "";
+    width: 18px; height: 1px; background: var(--accent);
+  }
+
+  /* ---------- About ---------- */
+  .body-text {
+    max-width: 640px;
+    font-size: clamp(16px, 1.4vw, 18px);
+    color: var(--ink);
+    line-height: 1.7;
+  }
+  .body-text p { margin: 0; }
+  .body-text p + p { margin-top: 1.1em; }
+  .body-text .muted { color: var(--ink-2); }
+
+  /* ---------- Products ---------- */
+  .product {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr;
+    gap: clamp(20px, 4vw, 56px);
+    padding: 36px 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+  }
+  .product:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 760px) {
+    .product { grid-template-columns: 1fr; gap: 18px; padding: 28px 0; }
+  }
+  .product .idx {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    padding-top: 8px;
+  }
+  .product .idx .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    margin-right: 8px;
+    transform: translateY(-2px);
+  }
+  .product .title {
+    font-size: clamp(24px, 2.4vw, 30px);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    line-height: 1.15;
+  }
+  .product .role {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+  }
+  .product .copy {
+    color: var(--ink-2);
+    font-size: 15.5px;
+    line-height: 1.65;
+    text-wrap: pretty;
+    margin: 0;
+  }
+  .product .status {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    padding: 5px 10px;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+  }
+  .product .status::before {
+    content: "";
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+
+  /* ---------- Trust ---------- */
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 8px;
+  }
+  @media (max-width: 760px) {
+    .trust-grid { grid-template-columns: 1fr; }
+  }
+  .trust-grid .cell {
+    background: var(--bg);
+    padding: 28px 24px;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .trust-grid .cell .k {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .trust-grid .cell .v {
+    font-size: 15px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .trust-grid .cell .v.tbd {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-block { max-width: 620px; }
+  .contact-block h2 {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .contact-block p {
+    color: var(--ink-2);
+    margin: 0 0 28px;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+  .contact-rows {
+    border-top: 1px solid var(--line);
+  }
+  .contact-row {
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  @media (max-width: 560px) {
+    .contact-row { grid-template-columns: 1fr; gap: 4px; padding: 16px 0; }
+    .contact-row .cta { justify-self: start; margin-top: 6px; }
+  }
+  .contact-row .k {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .contact-row .v {
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .contact-row .v .placeholder {
+    color: var(--ink-3);
+    font-family: var(--mono);
+    font-size: 13px;
+  }
+  .cta {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 8px 14px;
+    border-radius: 99px;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+  .cta:hover { background: var(--ink); color: var(--bg); }
+  .cta[aria-disabled="true"] {
+    color: var(--ink-3);
+    border-color: var(--line);
+    pointer-events: none;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 36px 0 56px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  footer .left { display: flex; gap: 14px; align-items: center; }
+  footer .dot {
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="copy.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+</body>
 </html>
