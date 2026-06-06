@@ -128,6 +128,8 @@
         <button class="lang-btn" data-lang="ko">한국어</button>
         <button class="lang-btn" data-lang="ja">日本語</button>
         <button class="lang-btn" data-lang="de">Deutsch</button>
+        <button class="lang-btn" data-lang="fr">Français</button>
+        <button class="lang-btn" data-lang="nl">Nederlands</button>
         <button class="lang-btn" data-lang="zh-TW">繁體中文</button>
       </div>
       <p class="guide-desc" id="page-desc"></p>
@@ -135,7 +137,7 @@
     </div>
 
     <script>
-      var IMG = { ko: 'images/kr/', _default: 'images/en/' };
+      var IMG = { en: 'images/en/', ko: 'images/kr/', ja: 'images/ja/', de: 'images/de/', fr: 'images/fr/', nl: 'images/nl/', 'zh-TW': 'images/zh-TW/', _default: 'images/en/' };
       function imgBase(lang) { return IMG[lang] || IMG._default; }
 
       var T = {
@@ -366,7 +368,89 @@
           security: { title: '🔒 Sicherheit & Datenschutz', items: ['Nur vertrauenswürdige Personen hinzufügen', 'Unbekannte Fernzugriffsanfragen nach Gesichtsprüfung ablehnen'] }
         },
 
-        'zh-TW': {
+          fr: {
+            title: 'Guide d\'utilisation Remote Hub',
+            desc: 'Une application d\'assistance à distance entre smartphones — le contrôleur visualise et communique avec l\'appareil cible.',
+            steps: [
+              { title: '⚙️ Étape 1 · Permissions de l\'application', blocks: [
+                { type: 'img', src: 'permission.jpg', alt: 'Écran des permissions' },
+                { type: 'ul', items: ['<b>Caméra</b> — aperçu pour reconnaissance faciale', '<b>Microphone</b> — communication vocale', '<b>Contacts</b> — synchronisation de la liste d\'amis', '<b>Notifications</b> — alertes de demandes à distance'] },
+                { type: 'p', text: 'Touchez "Autoriser" pour chaque permission.' }
+              ]},
+              { title: '🔐 Étape 2 · Connexion', blocks: [
+                { type: 'img', src: 'onboarding.jpg', alt: 'Écran de connexion' },
+                { type: 'ol', items: ['Touchez le bouton du code pays pour sélectionner votre pays', 'Saisissez votre numéro de téléphone (ex. +33 6 12 34 56 78)', 'Touchez "Send OTP" → recevez un code à 6 chiffres par SMS', 'Saisissez le code → progression automatique'] }
+              ]},
+              { title: '👥 Étape 3 · Amis', blocks: [
+                { type: 'img', src: 'friends_list.jpg', alt: 'Liste d\'amis' },
+                { type: 'ol', items: ['Touchez "+ Add Friend"', 'Recherchez par numéro ou ID utilisateur', 'Touchez "Add" pour envoyer la demande', 'Après acceptation, il apparaît dans la liste'] }
+              ]},
+              { title: '📞 Étape 4 · Demande à distance', blocks: [
+                { type: 'img', src: 'camera_preview.jpg', alt: 'Aperçu caméra' },
+                { type: 'ol', items: ['Sélectionnez un ami → touchez le bouton de demande à distance', 'Vérifiez votre visage dans l\'aperçu caméra', 'Touchez pour envoyer la demande lorsque prêt'] },
+                { type: 'img', src: 'incoming_screen.jpg', alt: 'Écran de demande entrante' },
+                { type: 'ol', start: 4, items: ['Le destinataire reçoit un écran d\'appel entrant + notification push'] },
+                { type: 'img', src: 'share_dialog.png', alt: 'Dialogue de partage d\'écran' },
+                { type: 'ol', start: 5, items: ['Le destinataire accepte → choisit la portée du partage (plein écran recommandé) → session distante commence'] }
+              ]},
+              { title: '🖥️ Étape 5 · Session distante', blocks: [
+                { type: 'img', src: 'remote_screen.jpg', alt: 'Écran distant' },
+                { type: 'ul', items: ['<b>Contrôleur</b> : pincement pour zoomer', 'Boutons supérieurs : Muet 🔇 / Fin ✕', '<b>Destinataire</b> : terminer via barre d\'état ou bouton in-app'] }
+              ]},
+              { title: '💳 Étape 6 · Système de tickets', blocks: [
+                { type: 'ul', items: ['Regardez 1 annonce = gagnez 1 ticket', 'Le temps de session est mesuré en tickets', 'Pas de ticket consommé si la session se termine sous 15s', 'Ensuite 1 ticket consommé par intervalle', 'La session s\'arrête quand les tickets sont épuisés', 'Tickets restants et alertes affichés en haut'] }
+              ]}
+            ],
+            troubleshooting: { title: '🔧 Dépannage', items: [
+              { q: 'Q. Mon ami n\'a pas reçu la demande', answers: ['Vérifiez que l\'app est en cours d\'exécution', 'Vérifiez l\'autorisation des notifications', 'Vérifiez la connexion réseau', 'Vérifiez que les deux appareils utilisent le même serveur régional'] },
+              { q: 'Q. L\'écran est saccadé ou lent', answers: ['Vérifiez la qualité du réseau', 'Fermez les applications en arrière-plan', 'Arrêtez les téléchargements/televersements en cours'] },
+              { q: 'Q. La session s\'est terminée automatiquement', answers: ['Tickets épuisés — démarrez une nouvelle session', 'Réseau déconnecté — renvoyez la demande', 'App crash — relancez et réessayez'] }
+            ] },
+            security: { title: '🔒 Sécurité & Confidentialité', items: ['N\'ajoutez que des personnes de confiance', 'Refusez les demandes inconnues après vérification du visage'] }
+          },
+
+          nl: {
+            title: 'Remote Hub Gebruikershandleiding',
+            desc: 'Een remote support-app tussen smartphones — de controller ziet het scherm van het doelapparaat en kan communiceren.',
+            steps: [
+              { title: '⚙️ Stap 1 · App-machtigingen', blocks: [
+                { type: 'img', src: 'permission.jpg', alt: 'Machtigingsscherm' },
+                { type: 'ul', items: ['<b>Camera</b> — gezichtsherkenningsvoorbeeld', '<b>Microfoon</b> — spraakcommunicatie', '<b>Contacten</b> — vriendenlijst synchronisatie', '<b>Meldingen</b> — meldingen voor remote verzoeken'] },
+                { type: 'p', text: 'Tik op "Allow" voor elke machtiging.' }
+              ]},
+              { title: '🔐 Stap 2 · Inloggen', blocks: [
+                { type: 'img', src: 'onboarding.jpg', alt: 'Inlogscherm' },
+                { type: 'ol', items: ['Tik op de landcodeknop om uw land te selecteren', 'Voer uw telefoonnummer in (bijv. +31 6 12 34 56 78)', 'Tik op "Send OTP" → ontvang een 6-cijferige code per sms', 'Voer de code in → gaat automatisch naar het volgende scherm'] }
+              ]},
+              { title: '👥 Stap 3 · Vrienden', blocks: [
+                { type: 'img', src: 'friends_list.jpg', alt: 'Vriendenlijst' },
+                { type: 'ol', items: ['Tik op "+ Add Friend"', 'Zoek op telefoonnummer of gebruikers-ID', 'Tik op "Add" om het verzoek te sturen', 'Na acceptatie verschijnt de vriend in de lijst'] }
+              ]},
+              { title: '📞 Stap 4 · Remote verzoek', blocks: [
+                { type: 'img', src: 'camera_preview.jpg', alt: 'Camera voorbeeld' },
+                { type: 'ol', items: ['Selecteer een vriend → tik op de remote knop', 'Controleer uw gezicht in de camera preview', 'Tik om het verzoek te verzenden wanneer klaar'] },
+                { type: 'img', src: 'incoming_screen.jpg', alt: 'Binnenkomend verzoek scherm' },
+                { type: 'ol', start: 4, items: ['De ontvanger krijgt een inkomend oproepscherm + pushmelding'] },
+                { type: 'img', src: 'share_dialog.png', alt: 'Schermdeel dialoog' },
+                { type: 'ol', start: 5, items: ['Ontvanger accepteert → kiest schermdeelbereik (volledig scherm aanbevolen) → remote sessie start'] }
+              ]},
+              { title: '🖥️ Stap 5 · Live remote', blocks: [
+                { type: 'img', src: 'remote_screen.jpg', alt: 'Live remote scherm' },
+                { type: 'ul', items: ['<b>Controller</b>: knijpen om in/uit te zoomen', 'Bovenste knoppen: Dempen 🔇 / Beëindigen ✕', '<b>Ontvanger</b>: beëindigen via statusbalk of in-app knop'] }
+              ]},
+              { title: '💳 Stap 6 · Ticket systeem', blocks: [
+                { type: 'ul', items: ['1 advertentie kijken = 1 ticket', 'Remote sessietijd wordt in tickets gemeten', 'Geen ticket verbruikt als sessie binnen 15s eindigt', 'Daarna 1 ticket per tijdseenheid', 'Sessie stopt automatisch bij 0 tickets', 'Resterende tickets en waarschuwingen worden bovenaan getoond'] }
+              ]},
+            ],
+            troubleshooting: { title: '🔧 Probleemoplossing', items: [
+              { q: 'Q. Mijn vriend heeft het verzoek niet ontvangen', answers: ['Controleer of de andere app draait', 'Controleer of notificaties zijn toegestaan', 'Controleer de netwerkverbinding', 'Controleer of beide op dezelfde regionale server staan'] },
+              { q: 'Q. Het scherm hapert of is traag', answers: ['Controleer de netwerksterkte', 'Sluit achtergrondapps', 'Stop lopende downloads/uploads'] },
+              { q: 'Q. De sessie is automatisch beëindigd', answers: ['Tickets op — start nieuwe sessie', 'Netwerk verbroken — vraag opnieuw aan en verbind', 'App gecrasht — herstart en probeer opnieuw'] }
+            ] },
+            security: { title: '🔒 Beveiliging & Privacy', items: ['Voeg alleen vertrouwde personen toe', 'Weiger onbekende remote verzoeken na gezichtscontrole'] }
+          },
+
+          'zh-TW': {
           title: 'Remote Hub 使用指南',
           desc: '智慧型手機之間的遠端支援應用程式 — 控制端可查看目標裝置的畫面並進行溝通。',
           steps: [
