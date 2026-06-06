@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "date": "2026-04-01",
-    "title": "서비스 시작 안내",
-    "content": "RemoteHub 서비스를 시작합니다.",
+    "date": "2026-06-06",
+    "title": "Exciting News! RemoteHub is Officially Launched on Google Play!",
+    "content": "Dear Users and Tech Enthusiasts,\n\nWe are thrilled to announce the official release of RemoteHub, now available for download on the Google Play Store!\n\nWhat is RemoteHub?\nRemoteHub is a lightweight, secure, and lightning-fast remote control and screen-sharing application designed to keep you connected to your devices from anywhere in the world.\n\nPowered by WebRTC technology, RemoteHub establishes a seamless peer-to-peer (P2P) connection between devices, ensuring low-latency screen streaming and real-time remote input control without compromising your privacy.\n\nKey Features:\n* Instant Screen Sharing: Share your screen in real-time with crystal-clear quality.\n* Seamless Remote Control: Access and navigate your devices remotely with intuitive touch and keyboard inputs.\n* Secure P2P Signaling: Your connection is direct and private, utilizing secure token-based signaling session management.\n\nWhether you need to provide quick technical support to a friend, manage your personal devices on the go, or collaborate with teammates seamlessly, RemoteHub is here to make remote connectivity effortless.\n\nThank you for being part of our journey. We can't wait for you to experience RemoteHub! If you have any feedback or suggestions, please feel free to reach out to us.\n\nBest regards,\nSparrowLabs",
     "enabled": true
   }
 ]
